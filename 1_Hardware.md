@@ -11,8 +11,6 @@ $559.35 - Purchased used on [Amazon](https://www.amazon.com/dp/B07XSD81TM?ref=pp
 Broadcom Gigabit Ethernet BCM5720 (4 ports)  
 2 x 1100W PSU (Part numbers 09TMRFA00, 0PR21CA00)  
 PERC H730 Mini Raid Controller  
-- Cleared RAID configuration  
-- [Set to HBA mode](https://www.dell.com/support/manuals/en-us/poweredge-rc-h730/perc9ugpublication/switching-the-controller-to-hba-mode?guid=guid-1fcc87e1-d534-451a-9947-56f1175886c5&lang=en-us)  
 - Allows passing the disk though to the OS  
 
 12 x 4 TB HDD  
