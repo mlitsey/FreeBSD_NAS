@@ -11,12 +11,10 @@ $559.35 - Purchased used on [Amazon](https://www.amazon.com/dp/B07XSD81TM?ref=pp
 Broadcom Gigabit Ethernet BCM5720 (4 ports)  
 2 x 1100W PSU (Part numbers 09TMRFA00, 0PR21CA00)  
 PERC H730 Mini Raid Controller  
-- Allows passing the disk though to the OS  
-
 12 x 4 TB HDD  
-- plan to setup with ZFS raid Z3  
 
-## Rear Drive Setup
+
+## Rear Drive Parts
 $29.99 - Backplan Board Kit from [Amazon](https://www.amazon.com/dp/B08CK87P5G?ref=ppx_yo2ov_dt_b_fed_asin_title) 2024-10-21  
 $14.99 - 2 x 2.5 inch Drive Trays  from [Amazon](https://www.amazon.com/dp/B091GW1B7R?ref=ppx_yo2ov_dt_b_fed_asin_title) 2024-10-21  
 $15.99 each - 2 x 128G SSD from [Amazon](https://www.amazon.com/dp/B0963SGYGF?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) 2024-10-21  
