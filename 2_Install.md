@@ -5,17 +5,17 @@ mfi driver causing I/O errors on install
 BIOS settings  
 RAID controller
 
-## BIOS fix 
+### BIOS fix 
 1. Update all firmware through Life Cycle Controller  
 2. X2APIC setting for the CPUs must be disabled  
     - this was already set correctly  
 
-## RAID fix
+### RAID fix
 set to HBA mode to pass through disks  
 - Cleared RAID configuration  
 - [Set to HBA mode](https://www.dell.com/support/manuals/en-us/poweredge-rc-h730/perc9ugpublication/switching-the-controller-to-hba-mode?guid=guid-1fcc87e1-d534-451a-9947-56f1175886c5&lang=en-us)  
 
-## mfi driver fix  
+### mfi driver fix  
 on boot enter the loader prompt (option 3 for me)
 - [FreeBSD Handbook Page](https://docs.freebsd.org/en/books/handbook/bsdinstall/#bsdinstall-view-probe)  
 
@@ -62,7 +62,7 @@ ssh to the server
 ```bash
 su - # become the root user
 pkg # this sets up the package manager
-pkg install vim, bash, git, zsh, tmux, sudo, freecolor, btop
+pkg install vim, bash, git, zsh, tmux, sudo, freecolor, btop, iperf3
 pkg prime-list # list user installed packages
 pkg prime-orgins # list user installed packages source?
 
