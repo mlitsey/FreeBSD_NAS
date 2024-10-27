@@ -1,9 +1,11 @@
 # Installing FreeBSD 14.1 Release  
 
 ## Issues  
-mfi driver causing I/O errors on install  
-BIOS settings  
-RAID controller
+[mfi driver](https://forums.freebsd.org/threads/using-mrsas-driver-during-10-3-install.56841/) causing I/O errors on install  
+[BIOS settings](https://www.reddit.com/r/freebsd/comments/136o9xi/freebsd_on_dell_r730xd_woes/)  
+RAID controller  
+
+![](./assets/2024-10-27-12-38-21.png)  
 
 ### BIOS fix 
 1. Update all firmware through Life Cycle Controller  
