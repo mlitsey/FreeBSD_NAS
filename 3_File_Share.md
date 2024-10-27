@@ -361,3 +361,8 @@ The password worked this time. Received another error
 "Windows can not access share"  
 
 Tested from Mac and was able to connect.  
+
+Tried again on windows 11 with `.\$username`  
+
+Found an article stating to install SMB client v1.  
+
