@@ -360,9 +360,45 @@ smbpasswd -a mlitsey
 The password worked this time. Received another error  
 "Windows can not access share"  
 
-Tested from Mac and was able to connect.  
+Tested from Mac-mini and was able to connect.  
 
 Tried again on windows 11 with `.\$username`  
 
-Found an article stating to install SMB client v1.  
+Found an [article](https://learn.microsoft.com/en-us/answers/questions/957194/windows-11-smb-client-cannot-connect-to-smb-share) stating to install SMB client v1.  
+
+After installing SMB client and restarting the pc I was still unable to connect. I thought that it could be something with DNS ,because the server wouldn't show up under netowrk, but could not find a fix.  
+
+I tried a couple of Windows tools and those came back good, but didn't show the shares. 
+```ps1
+# 1st test command
+Test-NetConnection -ComputerName FBSD-NAS -CommonTCPPort SMB                                                                                                                                                                                                                                                         ComputerName     : FBSD-NAS
+RemoteAddress    : 192.168.1.24
+RemotePort       : 445
+InterfaceAlias   : Wi-Fi
+SourceAddress    : 192.168.1.251
+TcpTestSucceeded : True
+
+# 2nd test command
+net view \\FBSD-NAS\
+Shared resources at \\FBSD-NAS\
+
+Samba 4.19.8
+
+Share name  Type  Used as  Comment
+
+-------------------------------------------------------------------------------
+Share       Disk
+The command completed successfully.
+```
+
+I went back to the mac-mini and noticed that when it mounted the share it showed up as `\\FBSD-NAS\share`. I switched back to the pc and tried using that path.   
+
+![](./assets/mac-mini_share.png)  
+![](./assets/mac-mini_share2.png)  
+
+It connected immediately, and I was able to add files and folders.  
+
+![](./assets/2024-10-27-12-02-53.png)  
+
+![](./assets/2024-10-27-12-03-19.png)  
 
