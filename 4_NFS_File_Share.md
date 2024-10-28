@@ -93,21 +93,21 @@ nas01/photos  sharenfs  off       default
 NAME             PROPERTY  VALUE     SOURCE
 nas01/documents  sharenfs  off       default
 
-zfs set sharenfs='-mapall=mlitsey,-network=192.168.35.0/24' nas01
+zfs set sharenfs='-mapall=mlitsey,-network=192.168.1.0/24' nas01
 
 # zfs get sharenfs nas01
 NAME   PROPERTY  VALUE                                     SOURCE
-nas01  sharenfs  -mapall=mlitsey,-network=192.168.35.0/24  local
+nas01  sharenfs  -mapall=mlitsey,-network=192.168.1.0/24  local
 
 
 # zfs get sharenfs nas01/photos
 NAME          PROPERTY  VALUE                                     SOURCE
-nas01/photos  sharenfs  -mapall=mlitsey,-network=192.168.35.0/24  inherited from nas01
+nas01/photos  sharenfs  -mapall=mlitsey,-network=192.168.1.0/24  inherited from nas01
 
 
 # zfs get sharenfs nas01/documents
 NAME             PROPERTY  VALUE                                     SOURCE
-nas01/documents  sharenfs  -mapall=mlitsey,-network=192.168.35.0/24  inherited from nas01
+nas01/documents  sharenfs  -mapall=mlitsey,-network=192.168.1.0/24  inherited from nas01
 
 service rpcbind restart
 service nfsd restart
@@ -116,8 +116,8 @@ service mountd restart
 
 I was then able to get NFS share on Windows 11 box. Which also disconnected the SMB share.  
 ```ps1
-mount -o anon \\192.168.35.24\nas01 n:
-n: is now successfully connected to \\192.168.35.24\nas01
+mount -o anon \\192.168.1.24\nas01 n:
+n: is now successfully connected to \\192.168.1.24\nas01
 
 The command completed successfully.
 ```
@@ -143,7 +143,7 @@ Starting lockd.
 
 I tried mounting the NFS share again, with success.  
 ```bash
-sudo mount_nfs 192.168.35.24:/nas01 /private/fbsd-nfs
+sudo mount_nfs 192.168.1.24:/nas01 /private/fbsd-nfs
 ```
 
 ![](./assets/mac-mini_nfs.png)  
