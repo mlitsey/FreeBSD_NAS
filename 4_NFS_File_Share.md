@@ -29,7 +29,7 @@ mountd_flags="-r"
 [nfsd](https://man.freebsd.org/cgi/man.cgi?nfsd) settings  
 - u = Serve UDP NFS clients.  
 - t = Serve TCP NFS clients.  
-- n = Specifies  how  many servers to create.  
+- n = Specifies  how  many servers/threads to create.  
 
 [mountd](https://man.freebsd.org/cgi/man.cgi?mountd(8)) settings  
 - r = Allow mount RPCs	requests for regular files to be served.  
@@ -37,7 +37,7 @@ mountd_flags="-r"
 setup the exports file  
 ```bash
 # vim /etc/exports
-/nas01 -maproot=mlitsey -network 192.168.1.0/24 # this lets all addresses with in 192.168.1 to connect
+/nas01 -maproot=mlitsey -network 192.168.35.0/24 # this lets all addresses with in 192.168.35 to connect
 ```
 [exports](https://man.freebsd.org/cgi/man.cgi?query=exports&sektion=5&format=html) settings  
 - directory to share  
@@ -62,8 +62,8 @@ Type 'NET HELPMSG 53' for more information.
 
 Then on mac-mini  
 ```bash
-showmount -e 192.168.1.24
-showmount: Cannot retrieve info from host: 192.168.1.24: RPC: Program not registered
+showmount -e 192.168.35.24
+showmount: Cannot retrieve info from host: 192.168.35.24: RPC: Program not registered
 ```
 
 I then noticed the line right after `service mountd reload` in the handbook that says to check [zfs-share(8)](https://man.freebsd.org/cgi/man.cgi?query=zfs-share&sektion=8&format=html) for ZFS instead of exports(5)  
@@ -98,21 +98,21 @@ nas01/photos  sharenfs  off       default
 NAME             PROPERTY  VALUE     SOURCE
 nas01/documents  sharenfs  off       default
 
-zfs set sharenfs='-mapall=mlitsey,-network=192.168.1.0/24' nas01
+zfs set sharenfs='-mapall=mlitsey,-network=192.168.35.0/24' nas01
 
 # zfs get sharenfs nas01
 NAME   PROPERTY  VALUE                                     SOURCE
-nas01  sharenfs  -mapall=mlitsey,-network=192.168.1.0/24  local
+nas01  sharenfs  -mapall=mlitsey,-network=192.168.35.0/24  local
 
 
 # zfs get sharenfs nas01/photos
 NAME          PROPERTY  VALUE                                     SOURCE
-nas01/photos  sharenfs  -mapall=mlitsey,-network=192.168.1.0/24  inherited from nas01
+nas01/photos  sharenfs  -mapall=mlitsey,-network=192.168.35.0/24  inherited from nas01
 
 
 # zfs get sharenfs nas01/documents
 NAME             PROPERTY  VALUE                                     SOURCE
-nas01/documents  sharenfs  -mapall=mlitsey,-network=192.168.1.0/24  inherited from nas01
+nas01/documents  sharenfs  -mapall=mlitsey,-network=192.168.35.0/24  inherited from nas01
 
 service rpcbind restart
 service nfsd restart
@@ -121,8 +121,8 @@ service mountd restart
 
 I was then able to get NFS share on Windows 11 box. Which also disconnected the SMB share.  
 ```ps1
-mount -o anon \\192.168.1.24\nas01 n:
-n: is now successfully connected to \\192.168.1.24\nas01
+mount -o anon \\192.168.35.24\nas01 n:
+n: is now successfully connected to \\192.168.35.24\nas01
 
 The command completed successfully.
 ```
@@ -131,8 +131,8 @@ The command completed successfully.
 I still had a problem with the mac-mini though.  
 
 ```bash
-sudo mount -t nfs 192.168.1.24:/nas01 /private/fbsd-nfs
-mount_nfs: can't mount with remote locks when server (192.168.1.24) is not running rpc.statd: RPC prog. not avail
+sudo mount -t nfs 192.168.35.24:/nas01 /private/fbsd-nfs
+mount_nfs: can't mount with remote locks when server (192.168.35.24) is not running rpc.statd: RPC prog. not avail
 mount: /private/fbsd-nfs failed with 74
 ```
 
@@ -148,7 +148,7 @@ Starting lockd.
 
 I tried mounting the NFS share again, with success.  
 ```bash
-sudo mount_nfs 192.168.1.24:/nas01 /private/fbsd-nfs
+sudo mount_nfs 192.168.35.24:/nas01 /private/fbsd-nfs
 ```
 
 ![](./assets/mac-mini_nfs.png)  
@@ -157,12 +157,12 @@ Mounting share to my Ubuntu NUC box
 ```bash
 apt update
 apt install nfs-common
-mount -t nfs 192.168.1.24:/nas01 /mnt/nas01
+mount -t nfs 192.168.35.24:/nas01 /mnt/nas01
 ll /mnt/nas01/
 
 vim /etc/fstab
 # add line to bottom of file
-192.168.1.24:/nas01 /mnt/nas01 nfs defaults 0 0
+192.168.35.24:/nas01 /mnt/nas01 nfs defaults 0 0
 
 umount /mnt/nas01
 systemctl daemon-reload
