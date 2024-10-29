@@ -3,6 +3,7 @@
 > 💡 **Update:**  
 > I turned SMB back on due to transfer speeds with Windows  
 > With NFS, tranfers were in the KBps but with SMB it was in the MBps  
+> `service samba_server onestart`  
 
 I started with the [FreeBSD Handbook](https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs), but also watched GaryH Tech [video1](https://m.youtube.com/watch?v=sobs3VU7ihw) and [video2](https://youtu.be/1fCasS0WZlo?si=42t8ePerOEHpd9C1) on YouTube.  
 

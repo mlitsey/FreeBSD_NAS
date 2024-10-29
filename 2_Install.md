@@ -64,7 +64,7 @@ ssh to the server
 ```bash
 su - # become the root user
 pkg # this sets up the package manager
-pkg install vim, bash, git, zsh, tmux, sudo, freecolor, btop, iperf3
+pkg install vim, bash, git, zsh, tmux, sudo, freecolor, btop, iperf3, rsync
 pkg prime-list # list user installed packages
 pkg prime-orgins # list user installed packages source?
 
