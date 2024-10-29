@@ -1,0 +1,19 @@
+# Enable color support of ls and also add handy aliases.
+alias ls='ls -G'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ll='ls -lhF'
+alias la='ls -alhF'
+alias lr='ls -ltrahF'
+#ls -d only gives me a "." so adding below for directories
+alias ld='ls -alhF |egrep "^d"'
+alias python3='python3.11'
+alias free='freecolor -m -o'
+alias vi='vim'
+alias nv='nvim'
+
+
+
+# remove spaces from file names, added here for easy reminder
+# find . -type f -name "* *" -print0 -exec bash -c 'mv "$0" "${0// /_}"' {} \;
