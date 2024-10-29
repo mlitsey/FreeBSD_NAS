@@ -1,5 +1,9 @@
 # Setting up NFS File Sharing  
 
+> 💡 **Update:**  
+> I turned SMB back on due to transfer speeds with Windows  
+> With NFS, tranfers were in the KBps but with SMB it was in the MBps  
+
 I started with the [FreeBSD Handbook](https://docs.freebsd.org/en/books/handbook/network-servers/#network-nfs), but also watched GaryH Tech [video1](https://m.youtube.com/watch?v=sobs3VU7ihw) and [video2](https://youtu.be/1fCasS0WZlo?si=42t8ePerOEHpd9C1) on YouTube.  
 
 I didn't know that I could get NFS working on Windows until the GaryH Tech video. I looked around and found these [video](https://www.youtube.com/watch?app=desktop&v=A9aRO_rHdpM) [video2](https://youtu.be/mOoO9mFE7BI?si=oKePVL_zcL4P2z_M) by Titus Tech Talk for setting it up.  
