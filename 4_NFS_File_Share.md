@@ -153,6 +153,23 @@ sudo mount_nfs 192.168.1.24:/nas01 /private/fbsd-nfs
 
 ![](./assets/mac-mini_nfs.png)  
 
+Mounting share to my Ubuntu NUC box  
+```bash
+apt update
+apt install nfs-common
+mount -t nfs 192.168.1.24:/nas01 /mnt/nas01
+ll /mnt/nas01/
+
+vim /etc/fstab
+# add line to bottom of file
+192.168.1.24:/nas01 /mnt/nas01 nfs defaults 0 0
+
+umount /mnt/nas01
+systemctl daemon-reload
+mount -a
+ll /mnt/nas01/
+```
+
 
 I stopped the SAMBA service and disabled it.  
 ```bash
