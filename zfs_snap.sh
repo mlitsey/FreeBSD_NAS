@@ -10,7 +10,9 @@ touch ${LOG}
 # Zero out log file, redirect all STDIN and STDERR output to log file
 exec >"${LOG}" 2>&1
 
-printf "%s - Starting Script /usr/local/bin/zfs_snap.sh \n" "$(date)"
+printf "\n\n %s - Starting Script /usr/local/bin/zfs_snap.sh \n\n" "$(date)"
+
+printf " \n\n Don't forget to check /var/log/syslog or /var/log/cron for cronjob script run times \n\n"
 
 printf " \n\n Removing old logs from /var/log/ \n\n"
 find /var/log/ -type f -name "zfs_snap*.log" -mtime +7 |xargs rm 

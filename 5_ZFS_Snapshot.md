@@ -78,7 +78,12 @@ zfs rename -r zroot@today @yesterday
 zfs snapshot -r zroot@today
 ```
 
-created script [/usr/local/bin/zfs_snap.sh](./zfs_snap.sh)  
+created and ran script [/usr/local/bin/zfs_snap.sh](./zfs_snap.sh)  
+```bash
+chmod 750 /usr/local/bin/zfs_snap.sh
+/usr/local/bin/zfs_snap.sh
+```
+
 
 [list snapshots](https://docs.oracle.com/cd/E19253-01/819-5461/gbiqe/index.html) after script has ran  
 ```bash
@@ -102,4 +107,20 @@ zroot/var/crash@today        0B      -    96K  -
 zroot/var/log@today         84K      -   424K  -
 zroot/var/mail@today         0B      -   160K  -
 zroot/var/tmp@today          0B      -    96K  -
+```
+
+Set script to run in crontab daily
+```bash
+crontab -e
+0 17 * * * /usr/local/bin/zfs_snap.sh
+
+crontab -l
+#+------------ Minute            (range: 0-59)
+#| +---------- Hour              (range: 0-23)
+#| | +-------- Day of the Month  (range: 1-31)
+#| | | +------ Month of the Year (range: 1-12)
+#| | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
+#| | | | |
+
+0 17 * * * /usr/local/bin/zfs_snap.sh
 ```

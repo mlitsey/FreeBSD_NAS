@@ -20,5 +20,10 @@ LOG_PATH="$LOGS/$(date +%F_%H%M%S).pane${TMUX_PANE//[^0-9]/}.log"
 # sudo apt install ansifilter
 tmux pipe-pane -t "${TMUX_PANE}" "exec cat - | ansifilter >> $LOG_PATH"
 
+# without ansifilter
+#tmux pipe-pane -t "${TMUX_PANE}" "exec cat - >> $LOG_PATH"
+
 # add to .bashrc
-# $HOME/.tmux/tmux-global-logging.sh
+# /usr/local/bin/tmux-global-logging.sh
+# or
+# $HOME/tmux-global-logging.sh
