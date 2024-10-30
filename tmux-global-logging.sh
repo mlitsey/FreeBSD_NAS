@@ -12,7 +12,7 @@ else
 fi
 
 LOGS=$HOME/.tmux/logs
-mkdir --parents $LOGS
+mkdir -p $LOGS
 #LOG_PATH="$LOGS/$(date +%Y%m%d_%H%M%S).pane${TMUX_PANE//[^0-9]/}.log"
 #LOG_PATH="$LOGS/$(date +%F_%T).pane${TMUX_PANE//[^0-9]/}.log"
 LOG_PATH="$LOGS/$(date +%F_%H%M%S).pane${TMUX_PANE//[^0-9]/}.log"
