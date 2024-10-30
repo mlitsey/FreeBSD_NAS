@@ -7,7 +7,7 @@ alias ll='ls -lhF'
 alias la='ls -alhF'
 alias lr='ls -ltrahF'
 #ls -d only gives me a "." so adding below for directories
-alias ld='ls -alhF |egrep "^d"'
+alias lda='ls -alhF |egrep "^d"'
 alias python3='python3.11'
 alias free='freecolor -m -o'
 alias vi='vim'

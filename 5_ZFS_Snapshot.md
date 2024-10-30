@@ -78,3 +78,28 @@ zfs rename -r zroot@today @yesterday
 zfs snapshot -r zroot@today
 ```
 
+created script [/usr/local/bin/zfs_snap.sh](./zfs_snap.sh)  
+
+[list snapshots](https://docs.oracle.com/cd/E19253-01/819-5461/gbiqe/index.html) after script has ran  
+```bash
+zfs list -t snapshot
+
+NAME                       USED  AVAIL  REFER  MOUNTPOINT
+nas01/documents@today        0B      -   512K  -
+nas01/photos@today           0B      -   512K  -
+zroot@today                  0B      -    96K  -
+zroot/ROOT@today             0B      -    96K  -
+zroot/ROOT/default@today   400K      -  1.50G  -
+zroot/home@today             0B      -    96K  -
+zroot/home/mlitsey@today     0B      -  1.93M  -
+zroot/tmp@today              0B      -   120K  -
+zroot/usr@today              0B      -    96K  -
+zroot/usr/ports@today        0B      -   814M  -
+zroot/usr/src@today          0B      -    96K  -
+zroot/var@today              0B      -    96K  -
+zroot/var/audit@today        0B      -    96K  -
+zroot/var/crash@today        0B      -    96K  -
+zroot/var/log@today         84K      -   424K  -
+zroot/var/mail@today         0B      -   160K  -
+zroot/var/tmp@today          0B      -    96K  -
+```
