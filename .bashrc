@@ -82,3 +82,6 @@ source ~/.aliases
 # set home/end key binding
 bind '"\e[4~": end-of-line'
 bind '"\e[1~": beginning-of-line'
+
+# immediately add command to history file
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
