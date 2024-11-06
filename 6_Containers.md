@@ -18,5 +18,7 @@ unqualified-search-registries = ["docker.io"]
 
 # jails
 
-[Starting with the handbook](https://docs.freebsd.org/en/books/handbook/jails/)  
+Starting with the [handbook](https://docs.freebsd.org/en/books/handbook/jails/)  
+Also looking at [Absolute FreeBSD](https://mwl.io/nonfiction/os#af3e)  
+And a bunch of websites...  
 
