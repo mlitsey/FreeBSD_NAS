@@ -51,8 +51,6 @@ crontab -e
 #| | | | |
 
 0 21 * * * /usr/local/bin/zfs_snap.sh
-# log management and rotation
-0 * * * * root newsyslog
 # do daily/weekly/monthly maintenance
 0 2 * * * root periodic daily
 0 3 * * 6 root periodic weekly
