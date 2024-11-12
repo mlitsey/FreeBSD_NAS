@@ -7,16 +7,30 @@ I used this [guide](https://iampusateri.com/posts/sshd-config/)
 ```bash
 # create ssh key
 ssh-keygen -t ed25519
-# copy key to server (if the first one doesn't work use the second one)
+
+# copy key to server
+# make sure to use the ".pub" file 
 ssh-copy-id $user@$server
-ssh-copy-id -i ~/.ssh/$key $user@$server
-# test key based login (if the first one doesn't work use the second one)
+    # or
+ssh-copy-id -i ~/.ssh/$key.pub $user@$server
+ssh-copy-id -i ~/.ssh/mal-CR10.pub lf_test@192.168.35.24
+
+# copy key from windows powershell to server
+type $env:USERPROFILE\.ssh\$key.pub | ssh $user@$server "cat >> .ssh/authorized_keys"
+
+
+# test key based login
 ssh $user@$server
+    # or
 ssh -i ~/.ssh/$key $user@$server
+ssh -i ~/.ssh/mal-CR10 lf_test@192.168.35.24
+
 # disable ssh password authentication
 vim /etc/rc.conf
 sshd_enable="YES"
 sshd_flags="-o KbdInteractiveAuthentication=no"
+
+# restart ssh service
 service sshd restart
 ```
 
