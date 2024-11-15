@@ -4,6 +4,7 @@
 
 I used this [guide](https://iampusateri.com/posts/sshd-config/)  
 
+[Powershell ssh-copy-id](https://superuser.com/questions/1747549/alternative-to-ssh-copy-id-on-windows)  
 ```bash
 # create ssh key
 ssh-keygen -t ed25519
@@ -69,5 +70,27 @@ crontab -e
 0 2 * * * root periodic daily
 0 3 * * 6 root periodic weekly
 0 5 1 * * root periodic monthly
+```
+
+## setup tailscale VPN  
+
+[tailscale](https://tailscale.com/)  
+
+I prefer using this to connect my devices remotely.  
+You can have up to 100 devices free.  
+
+```bash
+pkg install tailscale
+sysrc tailscaled_enable=“YES”
+service tailscaled start
+# may have to use onestart
+service tailscaled onestart
+tailscale login
+# copy URL and use it to login to account 
+To authenticate, visit:
+
+        https://login.tailscale.com/$your_unique_url
+
+Success.
 ```
 
