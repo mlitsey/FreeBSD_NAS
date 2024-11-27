@@ -25,3 +25,5 @@ Also looking at [Absolute FreeBSD](https://mwl.io/nonfiction/os#af3e)
 Might pick up [FreeBSD Mastery: Jails](https://mwl.io/nonfiction/os#fmjail)  
 And a bunch of websites...  
 
+jails is part of the default install for FreeBSD
+
