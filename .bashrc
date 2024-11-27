@@ -85,3 +85,7 @@ bind '"\e[1~": beginning-of-line'
 
 # immediately add command to history file
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
+## set terminal to clear after vi, more/less, etc.
+TERM=xterm-clear
+export TERM
