@@ -58,8 +58,12 @@ if [[ -n $force_color_prompt ]]; then
 fi
 
 ## Set a default prompt.
-export PS1='\[\033[01;32m\]\u\[\033[01;33m\]@\[\033[01;36m\]\h \[\033[01;33m\]\w \[\033[01;35m\]\$ \[\033[00m\]'
-##export PS1="\[\e[1;32m\][\u@\h \W]\$ \[\e[m\]"
+export PS1='\[\033[01;34m\]\u\[\033[01;33m\]@\[\033[01;36m\]\h \[\033[01;33m\]\w \[\033[01;35m\]\$ \[\033[00m\]'
+##export PS1="\[\e[1;31m\][\u@\h \W]\$ \[\e[m\]" # RED
+##export PS1="\[\e[1;32m\][\u@\h \W]\$ \[\e[m\]" # GREEN
+##export PS1="\[\e[1;33m\][\u@\h \W]\$ \[\e[m\]" # YELLOW
+##export PS1="\[\e[1;34m\][\u@\h \W]\$ \[\e[m\]" # BLUE
+##export PS1='[\u@\h \W]\$ ' # DEFAULT
 
 ## Uncomment if you want to try an advanced prompt.
 ##PS1="\[\e[0;34m\]┌─[\[\e[1;33m● \h\e[0;34m\]]─[\[\e[1;36m\u\e[0;34m\]]─[\e[1;37m\w\e[0;34m]─\[$(tput sgr0)\]\[\033[38;5;7m\][\[$(tput sgr0)\]\[\033[38;5;11m\]\A\[$(tput sgr0)\]\[\033[38;5;7m\]]\[$(tput sgr0)\]\[\033[38;5;15m\]$_EXIT_STATUS_STR: \$\[\e[0;34m\]\n\[\e[0;34m\]└─╼ \[\e[1;35m\]>> \[\e[00;00m\]"
