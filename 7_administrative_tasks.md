@@ -147,28 +147,30 @@ SPEEDHEX=$( printf "%x" $FANSPEED )
 
 if [[ $TEMP > $MAXTEMP ]];
   then
-    printf "Warning: Temperature is too high! Activating dynamic fan control! ($TEMP C)" | systemd-cat -t R730xd-IPMI-TEMP
+    logger " R730xd-IPMI-TEMP : Warning: Temperature is too high! Activating dynamic fan control! ($TEMP C)"
     echo "Warning: Temperature is too high! Activating dynamic fan control! ($TEMP C)"
     # This sets the fans to auto mode, so the motherboard will set it to a speed that it will need do cool the server down
     ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW -y $IPMIEK raw 0x30 0x30 0x01 0x01
 elif [[ $TEMP < $MINTEMP ]];
   then
-    printf "Temperature is OK ($TEMP C)" | systemd-cat -t R730xd-IPMI-TEMP
+    logger " R730xd-IPMI-TEMP : Temperature is OK ($TEMP C)"
     printf "Activating manual fan speeds! (3120 RPM)"
     # This sets the fans to manual mode
     ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW -y $IPMIEK raw 0x30 0x30 0x01 0x00
     # This is where we set the slower, quiet speed
     ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW -y $IPMIEK raw 0x30 0x30 0x02 0xff 0x$SPEEDHEX
   else
-          printf "Keeping settings the same until it needs to be changed, Temp is ($TEMP C)" | systemd-cat -t R730xd-IPMI-TEMP
+          logger " R730xd-IPMI-TEMP : Keeping settings the same until it needs to be changed, Temp is ($TEMP C)"
 fi
 
 # set in crontab
-chmod 750 setspeed.sh
+chmod 754 /usr/local/bin/setspeed.sh
 crontab -e 
 */1 * * * * /usr/local/bin/setspeed.sh > /dev/null 2>&1
 
 # check log for output
-tail -f /var/log/syslog
+tail -f /var/log/syslog # ubuntu
+journalctl -f # RHEL
+tail -f /var/log/messages
 ```
 
