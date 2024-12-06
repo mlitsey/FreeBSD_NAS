@@ -106,7 +106,7 @@ pkg install ipmitool
 
 # test
 ipmitool -I lanplus -H $IP -U fan-admin -P $PASSWORD -y 0000000000000000000000000000000000000000 sdr type temperature
-ipmitool -I lanplus -H $IP -U fan-admin -P $PASSWORD -y 0000000000000000000000000000000000000000 sdr type temperature |grep Exhaust |grep degrees |grep -Po '\d{2}' | tail -1)
+ipmitool -I lanplus -H $IP -U fan-admin -P $PASSWORD -y 0000000000000000000000000000000000000000 sdr type temperature |grep Exhaust |grep degrees |awk -F "|" '{print$5}'| grep -o '[0-9][0-9]')
 ```
 
 I was able to get a reply and moved on with creating the script with some changes.
@@ -140,19 +140,22 @@ MINTEMP=28
 # This variable sends a IPMI command to get the temperature, and outputs it as two digits.
 # Do not edit unless you know what you do.
 # Side note, if you are running ipmitool on the system you are controlling, you don't need to specify -H,-U,-P - from the OS installed on the host, ipmitool is assumed permitted. You only need host/user/pass for remote access.
-TEMP=$(ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW -y $IPMIEK sdr type temperature |grep Exhaust |grep degrees |grep -Po '\d{2}' | tail -1)
+# TEMP=$(ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW -y $IPMIEK sdr type temperature |grep Exhaust |grep degrees |grep -Po '\d{2}' | tail -1)
+TEMP=$(ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW -y $IPMIEK sdr type temperature |grep Exhaust |grep degrees | grep -o '[[:digit:]]\{2\}' | tail -1)
 
 # Dont edit this, this converts decimal to hex
 SPEEDHEX=$( printf "%x" $FANSPEED )
 
 if [[ $TEMP > $MAXTEMP ]];
   then
+    # printf "Warning: Temperature is too high! Activating dynamic fan control! ($TEMP C)" | systemd-cat -t R730xd-IPMI-TEMP
     logger " R730xd-IPMI-TEMP : Warning: Temperature is too high! Activating dynamic fan control! ($TEMP C)"
     echo "Warning: Temperature is too high! Activating dynamic fan control! ($TEMP C)"
     # This sets the fans to auto mode, so the motherboard will set it to a speed that it will need do cool the server down
     ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW -y $IPMIEK raw 0x30 0x30 0x01 0x01
 elif [[ $TEMP < $MINTEMP ]];
   then
+    # printf "Temperature is OK ($TEMP C)" | systemd-cat -t R730xd-IPMI-TEMP
     logger " R730xd-IPMI-TEMP : Temperature is OK ($TEMP C)"
     printf "Activating manual fan speeds! (3120 RPM)"
     # This sets the fans to manual mode
@@ -160,6 +163,7 @@ elif [[ $TEMP < $MINTEMP ]];
     # This is where we set the slower, quiet speed
     ipmitool -I lanplus -H $IPMIHOST -U $IPMIUSER -P $IPMIPW -y $IPMIEK raw 0x30 0x30 0x02 0xff 0x$SPEEDHEX
   else
+          # printf "Keeping settings the same until needing to be changed Temp is ($TEMP C)" | systemd-cat -t R730xd-IPMI-TEMP
           logger " R730xd-IPMI-TEMP : Keeping settings the same until it needs to be changed, Temp is ($TEMP C)"
 fi
 
